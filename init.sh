@@ -28,7 +28,7 @@ python zz_Tracknet_badminton_DataConvert.py --original_raw_data raw_data --targe
 python zz_Tracknet_badminton_DataConvert.py --original_raw_data raw_data2 --target_folder "TrackNetV2_Dataset/test"
 
 # Lancement de l'entraînement (ajustez le script selon votre besoin)
-python train.py --num_frame 3 --epochs 1 --batch_size 8 --learning_rate 0.001 --save_dir exp
+python train.py --num_frame 3 --epochs 1 --batch_size 8 --learning_rate 0.001 --save_dir exp --num_workjers 4
 
 # Upload vers S3
 aws s3 sync ./exp s3://${aws_s3_bucket.ml_results.id}/training_results/ --region ${aws_s3_bucket.ml_results.region}

@@ -16,6 +16,7 @@ parser.add_argument("--num_frame", type=int, default=3)
 parser.add_argument("--input_type", type=str, default="2d", choices=["2d", "3d"])
 parser.add_argument("--epochs", type=int, default=3)
 parser.add_argument("--batch_size", type=int, default=10)
+parser.add_argument("--num_workers", type=int, default=4)
 parser.add_argument("--learning_rate", type=float, default=0.001)
 parser.add_argument("--tolerance", type=float, default=4)
 parser.add_argument("--save_dir", type=str, default="exp")
@@ -30,6 +31,7 @@ model_name = args.model_name
 num_frame = args.num_frame
 input_type = args.input_type
 epochs = args.epochs
+num_workers = args.num_workers
 batch_size = args.batch_size
 learning_rate = args.learning_rate
 tolerance = args.tolerance
@@ -64,10 +66,10 @@ eval_test_dataset = Badminton_Dataset(
     root_dir=data_dir, split="test", mode=input_type, num_frame=num_frame, slideing_step=num_frame, debug=debug
 )
 train_loader = DataLoader(
-    train_dataset, batch_size=batch_size, shuffle=True, num_workers=batch_size, drop_last=True, pin_memory=False
+    train_dataset, batch_size=batch_size, shuffle=True, num_workers=num_workers, drop_last=True, pin_memory=False
 )  # 已更改pin_memory=False
 eval_loader = DataLoader(
-    eval_test_dataset, batch_size=batch_size, shuffle=False, num_workers=batch_size, drop_last=False, pin_memory=False
+    eval_test_dataset, batch_size=batch_size, shuffle=False, num_workers=num_workers, drop_last=False, pin_memory=False
 )  # 已更改pin_memory=False
 if __name__ == "__main__":
 

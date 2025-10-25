@@ -61,7 +61,6 @@ videos = sorted(glob.glob(os.path.join(original_raw_data, "*.mp4")))
 csvs = sorted(glob.glob(os.path.join(original_raw_data, "*.csv")))
 if len(videos) < 2:
     print("The number of videos is less than 2, please increase the number of videos")
-    print("影片數小於2，請增加影片數。\n\n")
     os._exit()
 # print(videos)
 # print(csvs)
