@@ -1,0 +1,9 @@
+# raw_data/
+# raw_data2/
+TrackNetV2_Dataset/
+exp/
+pred_result/
+.venv/
+__pycache__/
+
+.DS_Store

@@ -3,8 +3,8 @@ import glob
 import cv2
 import csv
 import shutil
-original_raw_data = 'raw_data2'
-target_folder = 'TrackNetV2_Dataset/test'
+original_raw_data = 'raw_data'
+target_folder = 'TrackNetV2_Dataset/train'
 
 
 
