@@ -11,6 +11,10 @@ parser.add_argument("--target_folder", type=str)
 # original_raw_data = "raw_data"
 # target_folder = "TrackNetV2_Dataset/train"
 
+args = parser.parse_args()
+original_raw_data = args.original_raw_data
+target_folder = args.target_folder
+
 
 def video2img(video, csvv, output_frame_path2, output_csv_path, output_video_path, match, video_name):
     # video to img
