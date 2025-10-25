@@ -11,21 +11,21 @@ export PATH="/root/.cargo/bin:$PATH"
 
 # Clone du repository
 # git clone ${var.git_repo_url} tracknetv3
-cd tracknetv3
+#cd tracknetv3
 
 # Création venv avec uv
-/root/.cargo/bin/uv venv .venv
+uv venv .venv
 source .venv/bin/activate
 
 # Installation des dépendances
-/root/.cargo/bin/uv sync
+uv sync
 
 # Création du dataset
 mkdir TrackNetV2_Dataset
 mkdir TrackNetV2_Dataset/train
 mkdir TrackNetV2_Dataset/test
-python zz_Tracknet_badminton_DataConvert.py --original_raw_data --target_folder "TrackNetV2_Dataset/train"
-python zz_Tracknet_badminton_DataConvert.py --original_raw_data2 --target_folder "TrackNetV2_Dataset/test"
+python zz_Tracknet_badminton_DataConvert.py --original_raw_data raw_data --target_folder "TrackNetV2_Dataset/train"
+python zz_Tracknet_badminton_DataConvert.py --original_raw_data raw_data2 --target_folder "TrackNetV2_Dataset/test"
 
 # Lancement de l'entraînement (ajustez le script selon votre besoin)
 python train.py --num_frame 3 --epochs 1 --batch_size 8 --learning_rate 0.001 --save_dir exp
