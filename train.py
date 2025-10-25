@@ -27,6 +27,7 @@ param_dict = vars(args)
 
 torch.backends.cudnn.benchmark = True  # cudnn找尋最佳卷積算法
 
+patience = 4
 model_name = args.model_name
 num_frame = args.num_frame
 input_type = args.input_type
@@ -136,8 +137,10 @@ if __name__ == "__main__":
         print(f"[epoch: {epoch})]\tEpoch runtime: {(time.time() - start_time) / 3600.:.2f} hrs")
         plot_result(loss_list, None, test_acc_dict, num_frame, save_dir, model_name)
 
-        if test_acc_dict["accuracy"][-1] >= max_test_acc:
-            max_test_acc = test_acc_dict["accuracy"][-1]
+        # Early stopping check
+        if accuracy > max_test_acc:
+            max_test_acc = accuracy
+            no_improve_count = 0
             torch.save(
                 dict(
                     epoch=epoch,
@@ -149,6 +152,12 @@ if __name__ == "__main__":
                 ),
                 f"{save_dir}/model_best.pt",
             )
+        else:
+            no_improve_count += 1
+            print(f"No improvement in accuracy for {no_improve_count} consecutive epochs.")
+            if no_improve_count >= patience:
+                print(f"Early stopping triggered after {epoch+1} epochs (no improvement for {patience} epochs).")
+                break
 
     torch.save(
         dict(
