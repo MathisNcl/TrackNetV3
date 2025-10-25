@@ -2,24 +2,15 @@
 set -e
 
 # Logs
-exec > >(tee /var/log/user-data.log)
-exec 2>&1
+# exec > >(tee /var/log/user-data.log)
+# exec 2>&1
 
 # Mise à jour système
-apt-get update
-apt-get install -y git awscli python3-pip curl
-
-# Installation uv
 curl -LsSf https://astral.sh/uv/install.sh | sh
 export PATH="/root/.cargo/bin:$PATH"
 
-# Création répertoire de travail
-cd /home/ubuntu
-mkdir -p ml-project
-cd ml-project
-
 # Clone du repository
-git clone ${var.git_repo_url} tracknetv3
+# git clone ${var.git_repo_url} tracknetv3
 cd tracknetv3
 
 # Création venv avec uv
